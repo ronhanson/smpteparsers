@@ -2,8 +2,8 @@
 <!-- 2006-03-03-jhurst -->
 <xs:schema targetNamespace="http://www.smpte-ra.org/schemas/430-3/2006/ETM" xmlns:etm="http://www.smpte-ra.org/schemas/430-3/2006/ETM" xmlns:enc="http://www.w3.org/2001/04/xmlenc#" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 
-  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="./sig.xsd"/>
-  <xs:import namespace="http://www.w3.org/2001/04/xmlenc#" schemaLocation="./enc.xsd"/>
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="sig.xsd"/>
+  <xs:import namespace="http://www.w3.org/2001/04/xmlenc#" schemaLocation="enc.xsd"/>
 
   <xs:element name="DCinemaSecurityMessage" type="etm:DCinemaSecurityMessageType"/>
 

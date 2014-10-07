@@ -1,14 +1,18 @@
-from distutils.core import setup
-#from smpteparsers import __version__
+from setuptools import setup, find_packages
+import os
+
+if os.environ.get('USER', '') == 'vagrant':
+    del os.link
 
 setup(
-    name = 'smpteparsers',
-    version = '0.0.1',
-    description = 'A set of python parsers for various SMPTE standards.',
-    author = 'Arts Alliance Media',
-    author_email = 'dev@artsalliancemedia.com',
-    url = 'http://www.artsalliancemedia.com',
-    packages = ('smpteparsers',),
-    requires = ['beautifulsoup4 == 4.2.1', 'lxml == 3.2.1', 'requests == 1.2.3', 'jsonschema == 2.3.0', 'pytz'],
-    extras_require = {"docs": ("sphinx",)}
+    name='smpteparsers',
+    version=open('VERSION.txt').read().strip(),
+    author='Arts Alliance Media',
+    author_email='dev@artsalliancemedia.com',
+    url='http://www.artsalliancemedia.com',
+    packages=find_packages(where='.', exclude=["*.tests", "*.tests.*", "tests.*", "tests", "libs"]),
+    description='A set of python parsers for various SMPTE standards.',
+    long_description=open('README.md').read().strip(),
+    install_requires=[r.strip() for r in open('requirements.txt').readlines()],
+    extras_require={"docs": ("sphinx",)},
 )

@@ -7,8 +7,8 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified" attributeFormDefault="unqualified">
 
-  <xs:import namespace="http://www.smpte-ra.org/schemas/430-3/2006/ETM" schemaLocation="./etm.xsd"/>
-  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="./sig.xsd"/>
+  <xs:import namespace="http://www.smpte-ra.org/schemas/430-3/2006/ETM" schemaLocation="etm.xsd"/>
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="sig.xsd"/>
 
   <xs:element name="KDMRequiredExtensions" type="kdm:KDMRequiredExtensionsType"/>
 

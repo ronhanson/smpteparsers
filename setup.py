@@ -1,9 +1,9 @@
 from distutils.core import setup
-from smpteparsers import __version__
+#from smpteparsers import __version__
 
 setup(
     name = 'smpteparsers',
-    version = __version__,
+    version = '0.0.1',
     description = 'A set of python parsers for various SMPTE standards.',
     author = 'Arts Alliance Media',
     author_email = 'dev@artsalliancemedia.com',

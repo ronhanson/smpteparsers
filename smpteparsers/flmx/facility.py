@@ -1,6 +1,9 @@
 from bs4 import BeautifulSoup
-from helper import get_boolean, get_string, get_date, get_uint, get_datetime, deliveries, validate_XML
-import error, os, logging
+from .helper import get_boolean, get_string, get_date, get_uint, get_datetime, deliveries, validate_XML
+from .error import FlmxCriticalError, FlmxPartialError, FlmxParseError, FlmxError
+import os
+import logging
+import six
 
 _logger = logging.getLogger(__name__)
 
@@ -39,12 +42,12 @@ class FacilityParser(object):
 
         #If it's a file, we call .read() on it so that it can be consumed twice - once by XMLValidator, and once by
         #beautiful soup
-        if not (isinstance(xml, str) or isinstance(xml, unicode)):
+        if not (isinstance(xml, str) or isinstance(xml, six.text_type)):
             try:
                 xml = xml.read()
             except AttributeError as e:
                 _logger.critical(repr(e))
-                raise error.FlmxCriticalError(repr(e))
+                raise FlmxCriticalError(repr(e))
 
         validate_XML(xml, os.path.join(os.path.dirname(__file__), u'schema', u'schema_facility.xsd'))
 
@@ -53,7 +56,7 @@ class FacilityParser(object):
         if flm.FLMPartial and get_boolean(flm.FLMPartial):
             msg = u"Partial FLMs not supported"
             _logger.error(msg)
-            raise error.FlmxPartialError(u"Partial FLMs are not supported by this parser.")
+            raise FlmxPartialError(u"Partial FLMs are not supported by this parser.")
 
         self.setup_facility(flm)
 
@@ -116,7 +119,7 @@ class FacilityParser(object):
         """
         screens = {}
 
-        for identifier, auditorium in self.auditoriums.iteritems():
+        for identifier, auditorium in self.auditoriums.items():
             # Flatten certificates for all devices in same auditorium into one list
             certs = [cert for device in auditorium.devices for cert in device.certificates]
 

@@ -217,9 +217,9 @@ def datespan(start, end, delta=datetime.timedelta(days=1)):
 
 
 if __name__ == '__main__':
-    print parse_date('2012-01-30 12:58:00')
-    print parse_date('2012-06-30 12:58:00')
+    print(parse_date('2012-01-30 12:58:00'))
+    print(parse_date('2012-06-30 12:58:00'))
     
-    print parse_date('2012-01-30T12:58:00Z')
-    print parse_date('2012-06-30T12:58:00Z')
+    print(parse_date('2012-01-30T12:58:00Z'))
+    print(parse_date('2012-06-30T12:58:00Z'))
     

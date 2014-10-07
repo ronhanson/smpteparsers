@@ -1,9 +1,25 @@
+import os
+import logging
+import six
 from datetime import datetime as dt
 from datetime import timedelta
 from bs4 import Tag
-from StringIO import StringIO
-import error, xmlvalidation, os
-import logging
+
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
+if six.PY2:
+    def u(x):
+        return unicode(x)
+else:
+    def u(x):
+        return x
+
+from .error import FlmxParseError
+from . import xmlvalidation
+
 
 _logger = logging.getLogger(__name__)
 
@@ -21,7 +37,7 @@ def get_boolean(s):
 def get_string(s):
     # XML contents are already a string so we need to strip the tags
     # and convert to unicode
-    return unicode(strip_tags(s)) if s is not None else None
+    return u(strip_tags(s)) if s is not None else None
 
 def get_date(s):
     s = strip_tags(s)
@@ -115,7 +131,7 @@ def validate_XML(xml, xsd):
     with open(xsd, u'r') as xsd:
         # If xml is a string, we wrap it in a StringIO object so validate and lxml
         # will work nicely with it
-        if isinstance(xml, str) or isinstance(xml, unicode):
+        if isinstance(xml, str) or isinstance(xml, six.text_type):
             xml = StringIO(xml)
                             
         if not v.validate(xml, xsd):
@@ -124,4 +140,4 @@ def validate_XML(xml, xsd):
             for entry in v.get_messages():
                 _logger.error('XML Validation failed: ' + repr(entry))
                 error_msg += repr(entry) + u"\n"
-            raise error.FlmxParseError(error_msg)
+            raise FlmxParseError(error_msg)

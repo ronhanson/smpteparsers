@@ -7,12 +7,14 @@ class FlmxError(Exception):
     def __str__(self):
         return 'FlmxError' + self.msg
 
+
 class FlmxCriticalError(FlmxError):
     u"""A critical error that cannot be resolved, causing program running to stop.
 
     For example, is thrown when there is a problem with the local schema xsd files.
     """
     pass
+
 
 class FlmxParseError(FlmxError):
     u"""An exception that is raised when an error is encountered within the validation of the xml document
@@ -21,6 +23,7 @@ class FlmxParseError(FlmxError):
     Indicates that the XML is invalid, and will be ignored.
     """
     pass
+
 
 class FlmxPartialError(FlmxError):
     u"""This exception is raised for partial FLMs with the FLMPartial flag set to true.

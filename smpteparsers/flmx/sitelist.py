@@ -1,9 +1,10 @@
 from datetime import datetime as dt
 from bs4 import BeautifulSoup
-from helper import get_datetime, validate_XML
+from .helper import get_datetime, validate_XML
 from operator import attrgetter
-from error import FlmxParseError
+from .error import FlmxCriticalError
 import os
+import six
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -54,7 +55,7 @@ class SiteListParser(object):
 
         #If it's a file, we call .read() on it so that it can be consumed twice - once by XMLValidator, and once by
         #beautiful soup
-        if not (isinstance(xml, str) or isinstance(xml, unicode)):
+        if not (isinstance(xml, str) or isinstance(xml, six.text_type)):
             try:
                 xml = xml.read()
             except AttributeError as e:
